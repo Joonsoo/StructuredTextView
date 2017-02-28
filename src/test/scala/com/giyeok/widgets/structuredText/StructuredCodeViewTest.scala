@@ -9,7 +9,7 @@ import org.eclipse.swt.layout.FillLayout
 import org.eclipse.swt.widgets.Display
 import org.eclipse.swt.widgets.Shell
 
-object StructuredTextViewTest {
+object StructuredCodeViewTest {
     case class Line(lineNum: Int) extends Tag
     case object Parameter extends Tag
     case object ParameterType extends Tag

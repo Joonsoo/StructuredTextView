@@ -118,6 +118,8 @@ object FlatFigureStream {
                         (FlatPush(actionable) #:: traverse(content)) append Stream(FlatPop(actionable))
                     case transformable: Transformable =>
                         (FlatPush(transformable) #:: traverse(transformable.content)) append Stream(FlatPop(transformable))
+                    case mutable: Mutable =>
+                        (FlatPush(mutable) #:: traverse(mutable.content)) append Stream(FlatPop(mutable))
                 }
             new FlatFigures(traverse(figure), List())
         }
@@ -141,6 +143,8 @@ object FlatFigureStream {
                         FlatPush(actionable) +: traverse(content) :+ FlatPop(actionable)
                     case transformable: Transformable =>
                         FlatPush(transformable) +: traverse(transformable.content) :+ FlatPop(transformable)
+                    case mutable: Mutable =>
+                        FlatPush(mutable) +: traverse(mutable.content) :+ FlatPop(mutable)
                 }
             new FlatFigures(traverse(figure), context)
         }

@@ -30,12 +30,13 @@ private class FigureExtra(figure: Figure) {
                 content.figureExtra.updateParent(Some(actionable))
             case transformable: Transformable =>
                 transformable.content.figureExtra.updateParent(Some(transformable))
+            case mutable: Mutable =>
+                mutable.content.figureExtra.updateParent(Some(mutable))
         }
     }
 
     def contentUpdated(): Unit = {
         startPoint._1.contentUpdated(figure)
-        // startPoint._1.rebalance(endPoint._1)
     }
 }
 
@@ -53,6 +54,7 @@ private class DeferredExtra(deferred: Deferred) {
         case None =>
             val content = deferred.contentFunc
             content.figureExtra.updateParent(Some(deferred))
+            deferred.figureExtra.contentUpdated()
             _contentCache = Some(content)
             _contentCache.get
     }

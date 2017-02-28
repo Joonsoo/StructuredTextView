@@ -100,6 +100,7 @@ class Transformable(contents: Map[String, Figure], defaultState: String) extends
     def state: String = currentState
     def state_=(newState: String): Unit = {
         currentState = newState
+        content.figureExtra.updateParent(Some(this))
         figureExtra.contentUpdated()
     }
 
@@ -119,5 +120,16 @@ case class Collapsible(expandedContent: Figure, defaultCollapsed: Boolean)
     }
     def toggle(): Unit = {
         setCollapsed(collapsed)
+    }
+}
+
+case class Mutable(defaultContent: Figure, tags: Set[Tag]) extends Figure {
+    private var _content: Figure = defaultContent
+
+    def content: Figure = _content
+    def update(newContent: Figure): Unit = {
+        _content = newContent
+        newContent.figureExtra.updateParent(Some(this))
+        figureExtra.contentUpdated()
     }
 }

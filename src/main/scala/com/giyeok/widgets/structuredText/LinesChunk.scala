@@ -99,7 +99,7 @@ private case class Line(line: FlatFigureLine) extends LinesChunk {
                     cc.addRight(label.measureDimension(dc))
                 case FlatDeferred(deferred) =>
                     val dim = deferred.pixelsDimension(dc)
-                    // TODO 수정
+                    // TODO
                     cc.addRight(dim.leading)
                 case _ => cc
             }
